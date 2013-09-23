@@ -9,7 +9,7 @@ module.exports = function(config) {
 		autoWatch: false,
 		browsers: ['Chrome'],
 		singleRun: false,
-        autoWatch: true,
+        autoWatch: false,
         urlRoot: '/_karma_/',
 		proxies: {
 			'/': 'http://localhost:8000/'
