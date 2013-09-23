@@ -24,7 +24,11 @@
         self.config = $.extend(defaults, self.config, options);
         console.log('self.config: '+JSON.stringify(self.config));
 
-
+    self.config.numSliderHover = false;
+    self.config.itemHovered = function() {
+        $scope.numericSliderConfig.numSliderHover = !$scope.numericSliderConfig.numSliderHover;
+        console.log('item hovered');
+    };
     self.initTemplates = function() {
         var templates = ['ngNumericSlider'];
         var promises = [];
@@ -69,6 +73,8 @@
                 $scope.numericSliderConfig.label = self.config.label;
                 $scope.numericSliderConfig.minValue = self.config.minValue;
                 $scope.numericSliderConfig.maxValue = self.config.maxValue;
+                $scope.numericSliderConfig.itemHovered = self.config.itemHovered;
+                $scope.numericSliderConfig.numSliderHover = self.config.numSliderHover;
 
                 $scope.numericSliderConfig.help = self.config.help;
                 console.log('self.config: '+ JSON.stringify(self.config) );
