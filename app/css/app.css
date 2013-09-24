@@ -1,4 +1,4 @@
-/*  */
+/* ng-numeric-slider */
 .editHighlight {
     background-color: #fadb4e;
 }
@@ -6,6 +6,13 @@
 .editableInput {
     background-color: #b6fac4;
 }
+
+input.numSliderInput {
+    width: 10%;
+    border: none;
+}
+/* ng-numeric-slider */
+
 
 /* app css stylesheet */
 .menu {

@@ -10,6 +10,8 @@
             "label": 'Check Every',
             "minValue": 0,
             "maxValue": 100,
+            "units":'seconds',
+            "step":1,
             "help" : undefined,
             "isEditable": false,
             "currentValue":'',
@@ -90,13 +92,15 @@
                 $scope.numericSliderConfig.label = self.config.label;
                 $scope.numericSliderConfig.minValue = self.config.minValue;
                 $scope.numericSliderConfig.maxValue = self.config.maxValue;
+                $scope.numericSliderConfig.units = self.config.units;
+                $scope.numericSliderConfig.step = self.config.step;
+
                 $scope.numericSliderConfig.itemHovered = self.config.itemHovered;
                 $scope.numericSliderConfig.numSliderHover = self.config.numSliderHover;
                 $scope.numericSliderConfig.editInput = self.config.editInput;
                 $scope.currentValue = self.config.currentValue;
 
                 $scope.numericSliderConfig.help = self.config.help;
-                console.log('self.config: '+ JSON.stringify(self.config) );
             });
         }
     };
@@ -110,18 +114,13 @@ angular.module('myApp.directives', []).
         restrict:'A',
         scope: true,
         replace: false,
-        // Todo:
-        // transclude, add external attributes, watch, model
-        //template: '<label for="slider-fill">Input slider:</label><input type="range" name="slider-fill" id="slider-fill" value="60" min="0" max="100" data-highlight="true" />',
         // Todo: use defaults to compile then watch if there are config values set
         compile: function(element, attrs) {
             // returns link function
             return function (scope, iElement, iAttrs) {
                 var numSlider = new numericSlider(scope, scope.numericSliderConfig, $templateCache, $http, $q);
                 numSlider.init().then(function(){
-                    //console.log('after numSlider.init()');
                     iElement.append($compile($templateCache.get('templates/ngNumericSlider.html'))(scope));
-                    //console.log('TEMPLATE: '+ $templateCache.get('templates/ngNumericSlider.html'));
                     element.find('input[data-type="range"]').slider();
                 });
 
