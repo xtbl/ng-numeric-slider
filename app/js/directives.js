@@ -12,13 +12,14 @@
             "maxValue": 100,
             "help" : undefined,
             "isEditable": false,
+            "currentValue":'',
             // default directive template
             "ngNumericSlider": "ngNumericSlider"
         };
         var self = this;
 
-        console.log('defaults: '+JSON.stringify(defaults));
-        console.log('options: '+JSON.stringify(options));
+//        console.log('defaults: '+JSON.stringify(defaults));
+//        console.log('options: '+JSON.stringify(options));
 
 
         self.config = $.extend(defaults, self.config, options);
@@ -32,13 +33,17 @@
     };
     self.config.editInput = function() {
         $scope.numericSliderConfig.isEditable = !$scope.numericSliderConfig.isEditable;
-        if ($scope.numericSliderConfig.isEditable) {
 
-        } else {
+        $scope.$watch('currentValue', function () {
+            //scope.currentValue = '';
+            console.log('currentValue was changed to: '+ $scope.currentValue);
+            // check value has numbers only
+            $scope.currentValue = $scope.currentValue.replace(/[a-zA-Z]/g,'');
+            console.log('TEXT: '+ $scope.currentValue.replace(/[a-zA-Z]/g,''));
+        });
 
-        }
-        console.log('item clicked');
-        console.log('$scope.numericSliderConfig.isEditable: '+ $scope.numericSliderConfig.isEditable);
+//        console.log('item clicked');
+//        console.log('$scope.numericSliderConfig.isEditable: '+ $scope.numericSliderConfig.isEditable);
         return $scope.numericSliderConfig.isEditable;
     };
 
@@ -80,7 +85,6 @@
         return p.promise;
     };
 
-
         self.init = function () {
             return self.initTemplates().then(function () {
                 $scope.numericSliderConfig.label = self.config.label;
@@ -89,6 +93,7 @@
                 $scope.numericSliderConfig.itemHovered = self.config.itemHovered;
                 $scope.numericSliderConfig.numSliderHover = self.config.numSliderHover;
                 $scope.numericSliderConfig.editInput = self.config.editInput;
+                $scope.currentValue = self.config.currentValue;
 
                 $scope.numericSliderConfig.help = self.config.help;
                 console.log('self.config: '+ JSON.stringify(self.config) );
@@ -124,8 +129,6 @@ angular.module('myApp.directives', []).
                     scope.numericSliderState = scope.numericSliderSelect;
 
                 });
-                //element.find('input[type="range"]').page('destroy').page();
-
             }
         }
     };
