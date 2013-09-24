@@ -1,6 +1,15 @@
 <div data-role="fieldcontain">
     <label for="numeric-slider">Input slider:</label>
     {{ numericSliderConfig.minValue }} - {{ numericSliderConfig.maxValue }}
-    <input ng-model="currentValue" ng-mouseenter="numericSliderConfig.itemHovered()" ng-mouseleave="numericSliderConfig.itemHovered()" ng-class="{editHighlight: numericSliderConfig.numSliderHover}" type="number" data-type="range" name="numeric-slider" id="numeric-slider" value="60" min="0" max="100" data-highlight="true" readonly/>
+    <input ng-model="currentValue"
+           ng-mouseenter="numericSliderConfig.itemHovered()"
+           ng-mouseleave="numericSliderConfig.itemHovered()"
+           ng-click="numericSliderConfig.editInput()"
+           ng-class="{editHighlight: numericSliderConfig.numSliderHover, editableInput: numericSliderConfig.isEditable}"
+           ng-readonly="!numericSliderConfig.isEditable"
+           type="number" data-type="range" name="numeric-slider"
+           id="numeric-slider" value="60" min="0" max="100"
+           data-highlight="true"
+           />
     <br>
 </div>

@@ -11,7 +11,7 @@
             "minValue": 0,
             "maxValue": 100,
             "help" : undefined,
-            "stateLabels" : {"first":'ON', "second":'OFF'},
+            "isEditable": false,
             // default directive template
             "ngNumericSlider": "ngNumericSlider"
         };
@@ -25,10 +25,23 @@
         console.log('self.config: '+JSON.stringify(self.config));
 
     self.config.numSliderHover = false;
+
     self.config.itemHovered = function() {
         $scope.numericSliderConfig.numSliderHover = !$scope.numericSliderConfig.numSliderHover;
         console.log('item hovered');
     };
+    self.config.editInput = function() {
+        $scope.numericSliderConfig.isEditable = !$scope.numericSliderConfig.isEditable;
+        if ($scope.numericSliderConfig.isEditable) {
+
+        } else {
+
+        }
+        console.log('item clicked');
+        console.log('$scope.numericSliderConfig.isEditable: '+ $scope.numericSliderConfig.isEditable);
+        return $scope.numericSliderConfig.isEditable;
+    };
+
     self.initTemplates = function() {
         var templates = ['ngNumericSlider'];
         var promises = [];
@@ -75,6 +88,7 @@
                 $scope.numericSliderConfig.maxValue = self.config.maxValue;
                 $scope.numericSliderConfig.itemHovered = self.config.itemHovered;
                 $scope.numericSliderConfig.numSliderHover = self.config.numSliderHover;
+                $scope.numericSliderConfig.editInput = self.config.editInput;
 
                 $scope.numericSliderConfig.help = self.config.help;
                 console.log('self.config: '+ JSON.stringify(self.config) );

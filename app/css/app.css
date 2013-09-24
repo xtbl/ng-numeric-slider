@@ -3,6 +3,10 @@
     background-color: #fadb4e;
 }
 
+.editableInput {
+    background-color: #b6fac4;
+}
+
 /* app css stylesheet */
 .menu {
   list-style: none;
