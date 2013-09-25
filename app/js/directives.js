@@ -5,7 +5,7 @@
 /**
  * Numeric Slider object
  */
-    var numericSlider = function ($scope, options, $templateCache, $http, $q) {
+    var numericSlider = function ($scope, options, $templateCache, $http, $q, $compile, elm) {
         var defaults = {
             "label": 'Check Every',
             "minValue": 0,
@@ -14,7 +14,7 @@
             "step":1,
             "help" : undefined,
             "isEditable": false,
-            "currentValue":'',
+            "currentValue":50,
             // default directive template
             "ngNumericSlider": "ngNumericSlider"
         };
@@ -42,10 +42,14 @@
             // check value has numbers only
             $scope.currentValue = $scope.currentValue.replace(/[a-zA-Z]/g,'');
             console.log('TEXT: '+ $scope.currentValue.replace(/[a-zA-Z]/g,''));
+            // snap numbers small and big numbers to the closest value inside range when the user finishes editing
+            if ($scope.currentValue < $scope.numericSliderConfig.minValue) {
+                $scope.currentValue =$scope.numericSliderConfig.minValue;
+            } else if($scope.currentValue > $scope.numericSliderConfig.maxValue) {
+                $scope.currentValue =$scope.numericSliderConfig.maxValue;
+            }
         });
 
-//        console.log('item clicked');
-//        console.log('$scope.numericSliderConfig.isEditable: '+ $scope.numericSliderConfig.isEditable);
         return $scope.numericSliderConfig.isEditable;
     };
 
@@ -101,6 +105,8 @@
                 $scope.currentValue = self.config.currentValue;
 
                 $scope.numericSliderConfig.help = self.config.help;
+                elm.append($compile($templateCache.get('templates/ngNumericSlider.html'))($scope));
+                //elm.find('a.ui-slider-handle').attr('aria-valuemin', 10);
             });
         }
     };
@@ -118,16 +124,24 @@ angular.module('myApp.directives', []).
         compile: function(element, attrs) {
             // returns link function
             return function (scope, iElement, iAttrs) {
-                var numSlider = new numericSlider(scope, scope.numericSliderConfig, $templateCache, $http, $q);
+                var numSlider = new numericSlider(scope, scope.numericSliderConfig, $templateCache, $http, $q, $compile, iElement);
                 numSlider.init().then(function(){
-                    iElement.append($compile($templateCache.get('templates/ngNumericSlider.html'))(scope));
+                    //iElement.append($compile($templateCache.get('templates/ngNumericSlider.html'))(scope));  // compile inside init
+
+                    scope.$watch('numericSliderConfig.minValue',function () {
+                        console.log('numericSliderConfig.minValue ');
+                        console.log('current min value in element is: '+iElement.find('a.ui-slider-handle').attr('aria-valuemin') );
+                        iElement.find('a.ui-slider-handle').attr('aria-valuemin', scope.numericSliderConfig.minValue);
+                        iElement.find('a.ui-slider-handle').attr('aria-valuemax', scope.numericSliderConfig.maxValue);
+                        element.find('input[data-type="range"]').slider('refresh');
+                    });
                     element.find('input[data-type="range"]').slider();
+                    iElement.find('select').bind( "change", function(event, ui) {
+                        scope.numericSliderState = scope.numericSliderSelect;
+
+                    });
                 });
 
-                iElement.find('select').bind( "change", function(event, ui) {
-                    scope.numericSliderState = scope.numericSliderSelect;
-
-                });
             }
         }
     };
