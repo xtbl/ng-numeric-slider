@@ -8,9 +8,48 @@
 }
 
 input.numSliderInput {
-    width: 35px;
+    width: 40px;
+    float: left;
     border: none;
+    position: relative;
+    bottom: -30px;
 }
+.ngNumericSlider-units {
+    /*bottom: 30px;*/
+    /*position: relative;*/
+}
+
+.ngNumericSlider-right-container {
+    float: left;
+    min-width: 200px;
+    max-width: 300px;
+    padding: 5px;
+    color: #646464;
+    font-size: 0.9em;
+}
+
+.ngNumericSlider-left-container {
+    float: left;
+    min-width: 130px;
+}
+
+.ngNumericSlider-left-container label {
+    float: left;
+    padding-right: 5px;
+}
+
+.ngNumericSlider-right-container .ui-slider div.ui-slider-track {
+    margin: 0 15px 0 5px;
+}
+
+.ngNumericSlider-right-container .ngNumericSlider-minValue {
+    float: left;
+}
+
+.ngNumericSlider-right-container .ngNumericSlider-maxValue {
+    float: right;
+}
+
 /* ng-numeric-slider */
 
 

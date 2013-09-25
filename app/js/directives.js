@@ -11,7 +11,7 @@
             "minValue": 0,
             "maxValue": 100,
             "units":'seconds',
-            "step":1,
+            "step": 1,
             "help" : undefined,
             "isEditable": false,
             "currentValue":50,
@@ -19,10 +19,6 @@
             "ngNumericSlider": "ngNumericSlider"
         };
         var self = this;
-
-//        console.log('defaults: '+JSON.stringify(defaults));
-//        console.log('options: '+JSON.stringify(options));
-
 
         self.config = $.extend(defaults, self.config, options);
         console.log('self.config: '+JSON.stringify(self.config));
@@ -98,6 +94,7 @@
                 $scope.numericSliderConfig.maxValue = self.config.maxValue;
                 $scope.numericSliderConfig.units = self.config.units;
                 $scope.numericSliderConfig.step = self.config.step;
+                $scope.numericSliderConfig.unitsInitial = self.config.units.charAt(0);
 
                 $scope.numericSliderConfig.itemHovered = self.config.itemHovered;
                 $scope.numericSliderConfig.numSliderHover = self.config.numSliderHover;

@@ -1,20 +1,28 @@
 <div data-role="fieldcontain">
-    <label for="numeric-slider">{{ numericSliderConfig.label }}</label>
-    <a ng-show="numericSliderConfig.help" href="{{ numericSliderConfig.help }}" target="_blank">
-        <img ng-src="img/more_information_icon.jpg">
-    </a>
-    <span>{{ numericSliderConfig.minValue }}</span> - <span>{{ numericSliderConfig.maxValue }}</span>
-    <input ng-model="currentValue"
-           ng-mouseenter="numericSliderConfig.itemHovered()"
-           ng-mouseleave="numericSliderConfig.itemHovered()"
-           ng-click="numericSliderConfig.editInput()"
-           ng-class="{editHighlight: numericSliderConfig.numSliderHover, editableInput: numericSliderConfig.isEditable}"
-           class="numSliderInput"
-           ng-readonly="!numericSliderConfig.isEditable"
-           type="text" data-type="range" name="numeric-slider"
-           id="numeric-slider" value="{{ numericSliderConfig.currentValue }}" min="{{ numericSliderConfig.minValue }}" max="{{ numericSliderConfig.maxValue }}"
-           data-highlight="true"
-           />   [ {{ numericSliderConfig.minValue }} ]
-    {{ numericSliderConfig.units }}
-    <br>
+    <div class="ngNumericSlider-left-container">
+        <label for="numeric-slider">{{ numericSliderConfig.label }}</label>
+        <a ng-show="numericSliderConfig.help" href="{{ numericSliderConfig.help }}" target="_blank">
+            <img ng-src="img/more_information_icon.jpg">
+        </a>
+    </div>
+    <div class="ngNumericSlider-right-container">
+        <span class="ngNumericSlider-minValue">{{ numericSliderConfig.minValue }}{{ numericSliderConfig.unitsInitial }}</span> <span class="ngNumericSlider-maxValue">{{ numericSliderConfig.maxValue }}{{ numericSliderConfig.unitsInitial }}</span>
+        <input ng-model="currentValue"
+               ng-mouseenter="numericSliderConfig.itemHovered()"
+               ng-mouseleave="numericSliderConfig.itemHovered()"
+               ng-click="numericSliderConfig.editInput()"
+               ng-class="{editHighlight: numericSliderConfig.numSliderHover, editableInput: numericSliderConfig.isEditable}"
+               class="numSliderInput"
+               ng-readonly="!numericSliderConfig.isEditable"
+               type="text" data-type="range" name="numeric-slider"
+               id="numeric-slider"
+               value="{{ numericSliderConfig.currentValue }}"
+               min="{{ numericSliderConfig.minValue }}"
+               max="{{ numericSliderConfig.maxValue }}"
+               step="{{ numericSliderConfig.step }}"
+               data-highlight="true"
+               />
+
+        <span class="ngNumericSlider-units">{{ numericSliderConfig.units }}</span>
+    </div>
 </div>
