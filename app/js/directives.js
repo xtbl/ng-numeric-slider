@@ -111,7 +111,6 @@ angular.module('myApp.directives', []).
         restrict:'A',
         scope: true,
         replace: false,
-        // Todo: use defaults to compile then watch if there are config values set
         compile: function(element, attrs) {
             // returns link function
             return function (scope, iElement, iAttrs) {
@@ -120,13 +119,9 @@ angular.module('myApp.directives', []).
                     scope.$watch('numericSliderConfig.minValue',function () {
                         iElement.find('a.ui-slider-handle').attr('aria-valuemin', scope.numericSliderConfig.minValue);
                         iElement.find('a.ui-slider-handle').attr('aria-valuemax', scope.numericSliderConfig.maxValue);
-                        element.find('input[data-type="range"]').slider('refresh');
+                        iElement.find('input[data-type="range"]').slider('refresh');
                     });
-                    element.find('input[data-type="range"]').slider();
-                    iElement.find('select').bind( "change", function(event, ui) {
-                        scope.numericSliderState = scope.numericSliderSelect;
-
-                    });
+                    iElement.find('input[data-type="range"]').slider();
                 });
 
             }
