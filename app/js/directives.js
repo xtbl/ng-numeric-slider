@@ -21,19 +21,16 @@
         var self = this;
 
         self.config = $.extend(defaults, self.config, options);
-        console.log('self.config: '+JSON.stringify(self.config));
 
     self.config.numSliderHover = false;
 
     self.config.itemHovered = function() {
         $scope.numericSliderConfig.numSliderHover = !$scope.numericSliderConfig.numSliderHover;
-        console.log('item hovered');
     };
     self.config.editInput = function() {
         $scope.numericSliderConfig.isEditable = !$scope.numericSliderConfig.isEditable;
 
         $scope.$watch('currentValue', function () {
-            console.log('currentValue was changed to: '+ $scope.currentValue);
             // check value has numbers only
             $scope.currentValue = $scope.currentValue.toString().replace(/[a-zA-Z]/g,'');
             // snap numbers small and big numbers to the closest value inside range when the user finishes editing
